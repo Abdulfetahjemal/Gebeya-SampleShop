@@ -5,6 +5,8 @@ const Joi = require('joi');
 const con = require('./dbservice')[1];
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const upload = require('express-fileupload');
+router.use(upload())
 router.use(bodyParser.json())
 
 // define the home page route

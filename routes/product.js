@@ -63,7 +63,7 @@ router.delete('/:productId', isauthorized, function (req, res) {
 
 
 router.post('/', isauthorized, function (req, res) {
-
+ console.log(req.body);
     let formdata = ProductSchema.validate({
         ProductName: req.body["ProductName"],
         Price: req.body["Price"],

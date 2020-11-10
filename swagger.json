@@ -1,0 +1,381 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"description": "Simple API that enlists ecomerce item and handles purchase details",
+		"version": "0.0.1",
+		"title": "Gebeya API - Practical exam",
+		"termsOfService": "http://google.com",
+		"contact": {
+			"email": "abdulfetahjemal7@gmail.com"
+		}
+	},
+	"host": "localhost:5000/",
+	"basePath": "main",
+	"tags": [
+		{
+			"name": "Authentication",
+			"description": "User Regstration / Login"
+		},
+		{
+			"name": "Product",
+			"description": "Create / Update / Delete Product Endpoint"
+		},
+		{
+			"name": "Cart",
+			"description": "Create / Update / Delete Cart info"
+		}
+	],
+	"schemes": ["http"],
+	"paths": {
+		"/user/regstration": {
+			"post": {
+				"tags": ["Authentication"],
+				"summary": "Create User",
+				"description": "User Regstration endpoint",
+				"operationId": "userRegstration",
+				"consumes": ["multipart/form-data"],
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"name": "email",
+						"in": "formData",
+						"description": "User email",
+						"required": true,
+						"type": "string"
+					},
+
+					{
+						"name": "password",
+						"in": "formData",
+						"description": "user password",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Product Added successfully"
+					},
+					"400": {
+						"description": "Failed to add product"
+					}
+				}
+			}
+		},
+		"/user/login": {
+			"post": {
+				"tags": ["Authentication"],
+				"summary": "Login user",
+				"description": "Returns a valid JWT if a valid email and password is provided",
+				"operationId": "userLogin",
+				"consumes": ["multipart/form-data"],
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"name": "email",
+						"in": "formData",
+						"description": "User email",
+						"required": true,
+						"type": "string"
+					},
+
+					{
+						"name": "password",
+						"in": "formData",
+						"description": "user password",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Product Added successfully"
+					},
+					"400": {
+						"description": "Failed to add product"
+					}
+				}
+			}
+		},
+		"/product/page/{pageNum}": {
+			"get": {
+				"tags": ["Product"],
+				"summary": "Get Product",
+				"description": "Get all products sorted by Price",
+				"operationId": "getProductList",
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"name": "pageNum",
+						"in": "path",
+						"description": "Page Number",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Product Added successfully"
+					},
+					"400": {
+						"description": "Failed to add product"
+					}
+				},
+				"security": [
+					{
+						"api_key": []
+					}
+				]
+			}
+		},
+		"/product": {
+			"post": {
+				"tags": ["Product"],
+				"summary": "Add Product",
+				"description": "Add Food Data",
+				"operationId": "uploadFile",
+				"consumes": ["multipart/form-data"],
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"name": "ProductName",
+						"in": "formData",
+						"description": "Product Name",
+						"required": true,
+						"type": "string"
+					},
+
+					{
+						"name": "DetailedDescription",
+						"in": "formData",
+						"description": "Detail Product Description",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "Description",
+						"in": "formData",
+						"description": "Product Description",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "Price",
+						"in": "formData",
+						"description": "Product Price in ETB",
+						"required": true,
+						"type": "number"
+					},
+					{
+						"name": "Image",
+						"in": "formData",
+						"description": "file to upload",
+						"required": true,
+						"type": "file"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Product Added successfully"
+					},
+					"400": {
+						"description": "Failed to add product"
+					}
+				},
+				"security": [
+					{
+						"api_key": []
+					}
+				]
+			}
+		},
+		"/product/{productId}": {
+			"get": {
+				"tags": ["Product"],
+				"summary": "Get single product ",
+				"description": "Get single product ...",
+				"operationId": "getProduct",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"name": "productId",
+						"in": "path",
+						"description": "Product Name",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Product successfully recived"
+					},
+					"400": {
+						"description": "Unable to fetch product detail"
+					}
+				},
+				"security": [
+					{
+						"api_key": []
+					}
+				]
+			},
+			"delete": {
+				"tags": ["Product"],
+				"summary": "Delete Product ",
+				"description": "Remove Product from DB",
+				"operationId": "deleteProduct",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"name": "productId",
+						"in": "path",
+						"description": "Product Name",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Product successfully recived"
+					},
+					"400": {
+						"description": "Unable to fetch product detail"
+					}
+				},
+				"security": [
+					{
+						"api_key": []
+					}
+				]
+			}
+		},
+		"/cart": {
+			"post": {
+				"tags": ["Cart"],
+				"summary": "Add to cart",
+				"description": "Add single / multiple items ",
+				"operationId": "addToCart",
+				"consumes": ["multipart/form-data"],
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"name": "products",
+						"in": "formData",
+						"description": "Product Name",
+						"required": true,
+						"type": "array",
+						"items": {
+							"type": "number"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Product Added successfully"
+					},
+					"400": {
+						"description": "Failed to add product"
+					}
+				},
+				"security": [
+					{
+						"api_key": []
+					}
+				]
+			},
+			"get": {
+				"tags": ["Cart"],
+				"summary": "Get cart items",
+				"description": "Add single / multiple items ",
+				"operationId": "getCartItem",
+				"consumes": ["multipart/form-data"],
+				"produces": ["application/json"],
+
+				"responses": {
+					"200": {
+						"description": "Cart fetched successfully"
+					},
+					"400": {
+						"description": "Unable to fetch cart"
+					}
+				},
+				"security": [
+					{
+						"api_key": []
+					}
+				]
+			}
+		},
+		"/cart/{cartId}": {
+			"get": {
+				"tags": ["Cart"],
+				"summary": "Get cart item detail",
+				"description": "Get discription about cart ",
+				"operationId": "getSingleCart",
+				"consumes": ["multipart/form-data"],
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"name": "cartId",
+						"in": "path",
+						"description": "Cart Id",
+						"required": true,
+						"type": "number"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Product Added successfully"
+					},
+					"400": {
+						"description": "Failed to add product"
+					}
+				},
+				"security": [
+					{
+						"api_key": []
+					}
+				]
+			},
+			"delete": {
+				"tags": ["Cart"],
+				"summary": "Remove item from cart",
+				"description": "Remove single item from cart",
+				"operationId": "deleteCartItem",
+				"consumes": ["multipart/form-data"],
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"name": "cartId",
+						"in": "path",
+						"description": "Cart Id",
+						"required": true,
+						"type": "number"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Cart fetched successfully"
+					},
+					"400": {
+						"description": "Unable to fetch cart"
+					}
+				},
+				"security": [
+					{
+						"api_key": []
+					}
+				]
+			}
+		}
+	},
+	"securityDefinitions": {
+		"api_key": {
+			"type": "apiKey",
+			"name": "authorization",
+			"in": "header"
+		}
+	}
+}
