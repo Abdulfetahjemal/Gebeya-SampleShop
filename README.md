@@ -1,2 +1,2 @@
 # Gebeya-SampleShop
-URL : http://me.openflow-plc.com/main
+URL FOR TESTING SWAGGER : http://me.openflow-plc.com/main
