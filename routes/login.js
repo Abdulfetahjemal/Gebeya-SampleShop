@@ -19,10 +19,10 @@ router.post('/', (req, res) => {
     }
     else {
 
-        con.query("Select password from Users where email = '" + req.body["email"] + "'", function (err, result) {
-            bcrypt.compare(req.body["password"], result[0].password, function (err, result) {
-                if (result)
-                    res.send(jwt.sign({ email: req.body["email"] }, 'ForDemoOnlllny'))
+        con.query("Select uid, password from Users where email = '" + req.body["email"] + "'", function (err, result) {
+            bcrypt.compare(req.body["password"], result[0].password, function (err, result2) {
+                if (result2)
+                    res.send(jwt.sign({ uid: result[0].uid, email: req.body["email"] }, 'ForDemoOnlllny'))
                 else
                     res.send('Login failed')
             });

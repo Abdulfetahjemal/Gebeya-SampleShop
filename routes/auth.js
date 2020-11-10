@@ -7,6 +7,7 @@ async function isAuthorized(req, res, next) {
             if (decoded == undefined) {
                 res.status(200).json({ message: "Wrong token" })
             } else {
+                req.id = decoded.uid
                 next()
             }
         });
