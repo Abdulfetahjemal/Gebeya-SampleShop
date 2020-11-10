@@ -7,7 +7,7 @@ const swaggerDocument = require('./swagger.json');
 
 
 app.use('/main', main)
-app.use('/', swaggerUI.serve, swaggerUI.setup(swaggerDocument, { explorer: true }))
+app.use('/', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
