@@ -231,7 +231,7 @@
 					{
 						"name": "productId",
 						"in": "path",
-						"description": "Product Name",
+						"description": "Product id",
 						"required": true,
 						"type": "string"
 					}
